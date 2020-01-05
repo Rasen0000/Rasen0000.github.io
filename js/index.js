@@ -12,7 +12,10 @@ const runMyShit = () => {
 		World = Matter.World, /// используется для создания и управления миром, в котором работает движок
 		Bodies = Matter.Bodies; ////позволяет создавать объекты твердого тела
 
-	const engine = Engine.create(5); ///создания нового движка
+	const engine = Engine.create({
+		constraintIterationsNumber: 4,
+		positionIterationsNumber: 10
+	}); ///создания нового движка
 
 	const SCREEN_SIZE = {
 		width: document.body.clientWidth,
@@ -31,10 +34,14 @@ const runMyShit = () => {
 
 
 	const ballA = Bodies.circle(500, 50, 30); ///круг x/y/радиус/
+	Matter.Body.setMass(ballA, 1000);
+
 	const ballB = Bodies.circle(460, 10, 40); ///кругляш
+	Matter.Body.setMass(ballB, 10);
 
 	const GROUND_HEIGHT = 30;
 	const ground = Bodies.rectangle(0, SCREEN_SIZE.height - GROUND_HEIGHT, SCREEN_SIZE.width, GROUND_HEIGHT, { isStatic: true });
+
 	Matter.Body.rotate(ground, -Math.PI / 80 );
 
 	World.add(engine.world, [
