@@ -32,6 +32,8 @@ const runMyShit = () => {
 		}
 	});
 
+	const mouse = Matter.Mouse.create(render.canvas);
+
 
 	const ballA = Bodies.circle(500, 50, 30); ///круг x/y/радиус/
 	Matter.Body.setMass(ballA, 1000);
@@ -57,6 +59,7 @@ const runMyShit = () => {
 	]);
 
 
+	World.add(engine.world, Matter.MouseConstraint.create(engine, { mouse: mouse }));
 
 	/*	Фрагмент кода ниже добавляет 3 шарика, соединенных попарно жесткой связью*/
 	const connectedBalls = [
