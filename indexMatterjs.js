@@ -17,7 +17,7 @@ var render = Render.create({  /// создания нового рендерер
 
 var boxA = Bodies.rectangle(400, 200, 80, 60); ///прямоугольник
 var ballA = Bodies.circle(500, 50, 30, 10); ///круг x/y/радиус/
-var ballB = Bodies.circle(460, 10, 40, 10); ///круг
+var ballB = Bodies.circle(460, 10, 40, 10); ///кругляш
 var ground = Bodies.rectangle(400, 1380, 810, 60, { isStatic: true });
 
 World.add(engine.world, [boxA, ballA, ballB, ground]); ///добавление фигур в мир
