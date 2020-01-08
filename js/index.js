@@ -98,14 +98,14 @@ const runMyShit = () => {
 	World.add(engine.world, generateBrickWall(100, SCREEN_SIZE.height - 15 * GROUND_HEIGHT));
 
 
-	const ballB = Bodies.circle(460, 10, 40); ///кругляш
-	Matter.Body.setMass(ballB, 10);
+	const ballB = Bodies.circle(460, 5, 50, 100); ///кругляш
+	Matter.Body.setMass(ballB, 10)
 
         // Rope
        var group = Body.nextGroup(true);
 
-        var rope = Composites.stack(180, -10, 2, 2, 2, 0, function(x, y) {
-            return Bodies.rectangle(x, y, 50, 10, {
+        var rope = Composites.stack(370, 10, 2, 2, 2, 10, function(x, y) {
+            return Bodies.rectangle(x, y, 50, 10, { ///размеры блока
                 collisionFilter: {
                      group: group 
                 },
@@ -117,23 +117,25 @@ const runMyShit = () => {
             });
         });
 
-        Composites.chain(rope, 0.5, 0, -0.4, 0, {
+        Composites.chain(rope,0.5, 0, -0.4, 0, { ///место стыка, угол стыка, взаимодействие междублоками, угол стыка
             stiffness: 0.8,
-            length: 2
+            length: 1
         });
         Composite.add(rope, Constraint.create({
-            bodyB: rope.bodies[0],
+            bodyB: ballB,
+			bodyA: rope.bodies[0],
             pointB: {
-                x: -25,
+                x: 0,
                 y: 0
-            },
+            }, 
             pointA: {
-                x: 180,
+                x: 0,
                 y: 0
-            },
-            stiffness: 0.5
+            }, 
+            stiffness: 1
         }));
 
+;
 
 World.add(engine.world, [
 			rope, 
