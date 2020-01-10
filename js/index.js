@@ -98,7 +98,7 @@ const runMyShit = () => {
 	World.add(engine.world, generateBrickWall(100, SCREEN_SIZE.height - 15 * GROUND_HEIGHT));
 
 
-	const ballB = Bodies.circle(460, 5, 50, {collisionFilter: {group: -1} }); ///кругляш
+	const ballB = Bodies.circle(460, 5, 80, {collisionFilter: {group: -1},render: {sprite: {texture: "images/chick.png"}} }); ///кругляш
 /* 	Matter.Body.setMass(ballB, 10), */
 	///плотность
 
@@ -131,8 +131,8 @@ const runMyShit = () => {
             bodyB: ballB,
 			bodyA: rope.bodies[0],
            pointB: {
-                x: 50,
-                y: 0
+                x: 0,
+                y: -70
             }, 
             pointA: {
                 x: -20,
