@@ -98,14 +98,20 @@ const runMyShit = () => {
 	World.add(engine.world, generateBrickWall(100, SCREEN_SIZE.height - 15 * GROUND_HEIGHT));
 
 
-	const ballB = Bodies.circle(460, 5, 50, 100); ///кругляш
-	Matter.Body.setMass(ballB, 10)
+	const ballB = Bodies.circle(460, 5, 50, {collisionFilter: {group: -1} }); ///кругляш
+/* 	Matter.Body.setMass(ballB, 10), */
+	///плотность
+
+				
+	const staticbrick = Bodies.rectangle(70, 200, 50, 20, { isStatic: true },{collisionFilter: {group: group} } );
+	
+			
 
         // Rope
        var group = Body.nextGroup(true);
 
         var rope = Composites.stack(370, 10, 2, 2, 2, 10, function(x, y) {
-            return Bodies.rectangle(x, y, 50, 10, { ///размеры блока
+            return Bodies.rectangle(x, y, 50, 10,  { ///размеры блока
                 collisionFilter: {
                      group: group 
                 },
@@ -124,22 +130,43 @@ const runMyShit = () => {
         Composite.add(rope, Constraint.create({
             bodyB: ballB,
 			bodyA: rope.bodies[0],
-            pointB: {
-                x: 0,
+           pointB: {
+                x: 50,
                 y: 0
             }, 
             pointA: {
-                x: 0,
+                x: -20,
                 y: 0
+            },  
+            stiffness: 0.4,
+			length: 0
+        }));
+		
+		
+		        Composite.add(rope, Constraint.create({
+            bodyB: staticbrick,
+			bodyA: rope.bodies[3],
+            pointB: {
+                x: 0,
+                y: 17
             }, 
-            stiffness: 1
+            pointA: {
+                x: 20,
+                y: 0
+            },  
+            stiffness: 0.4,
+			length: 0
         }));
 
 ;
 
+
+				
+				
 World.add(engine.world, [
 			rope, 
 			ballB,
+			staticbrick,
 			/* Matter.Constraint.create({ bodyA: rope[0], bodyB: ballB [1] }), */
 			]);
 
