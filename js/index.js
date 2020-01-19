@@ -42,6 +42,8 @@ const runMyShit = () => {
 		Composite = Matter.Composite,
 		Constraint = Matter.Constraint,
 		Events = Matter.Events,
+		Mouse = Matter.Mouse,
+		MouseConstraint = Matter.MouseConstraint,
 		Body = Matter.Body,
 		Bodies = Matter.Bodies; ////позволяет создавать объекты твердого тела
 
@@ -62,7 +64,7 @@ const runMyShit = () => {
 		}
 	});
 
-	const mouse = Matter.Mouse.create(render.canvas);
+	/* const mouse = Matter.Mouse.create(render.canvas); */
 
 
 	const ballA = Bodies.circle(500, 50, 30); ///круг x/y/радиус/
@@ -88,7 +90,7 @@ const runMyShit = () => {
 	]);
 
 
-	World.add(engine.world, Matter.MouseConstraint.create(engine, { mouse: mouse }));
+	/* World.add(engine.world, Matter.MouseConstraint.create(engine, { mouse: mouse })); */
 
 
 
@@ -184,9 +186,111 @@ World.add(engine.world, [
 		Matter.Constraint.create({ bodyA: connectedBalls[1], bodyB: connectedBalls[2]}),
 		
 	]);
+	
+	
+	
+	
 
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+World.add(engine.world, mouseConstraint);
+	
+	 render.mouse = mouse;
+	
+	    
+
+	
+		
+const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true },{collisionFilter: {group: group} } );
+	
+
+	
+const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60);
+	
+	
+	var addSquare = function () {
+	 return  Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60);
+	};	
+	
+	
+	
+  Events.on(mouseConstraint, 'mousedown', function(event) {
+/* 		var mousePosition = event.mouse.position;
+        console.log('mousedown at ' + mousePosition.x + ' ' + mousePosition.y); /// работает
+         addSquare(engine); */
+	let x = mouse.position.x;
+    let y = mouse.position.y;	
+	let object1;
+	object1 = Bodies.rectangle(x, y, 10, 10);	 
+	World.add(engine.world, [
+		
+			object1
+		
+			])	 
+        
+    }); 	
+		
+		
+		
+		
+		
+		
+	
+		World.add(engine.world, [
+			rrr,
+			
+			staticbrick2,		
+		addSquare
+			])
 	Engine.run(engine); ///запуск движка
 	Render.run(render); ///запуск рендера
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/* var addSquare = function () {
+ return Bodies.rectangle(Math.random()*400 + 30, 30, 60, 60);
+};
+
+
+$('.add-square').on('mousedown', function () {
+    World.add(engine.world, addSquare());
+} */	
+	
+	/* Matter.Mouse.setElement(mouse, staticbrick2); */
+	/* Matter.Mouse.create(addSquare); */
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 };
 
 
