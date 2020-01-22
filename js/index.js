@@ -45,6 +45,7 @@ const runMyShit = () => {
 		Mouse = Matter.Mouse,
 		MouseConstraint = Matter.MouseConstraint,
 		Body = Matter.Body,
+		Pair = Matter.Pair,
 		Bodies = Matter.Bodies; ////позволяет создавать объекты твердого тела
 
 	const engine = Engine.create(); ///создания нового движка
@@ -230,16 +231,37 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 	let x = mouse.position.x;
     let y = mouse.position.y;	
 	let object1;
-	object1 = Bodies.rectangle(x, y, 10, 10);	 
+	let object2;
+	let object3;
+	object1 = Bodies.rectangle(x+1, y+1, 10, 10);
+object2 = Bodies.rectangle(x+8, y, 10, 10);
+object3 = Bodies.rectangle(x, y+10, 10, 10);	
 	World.add(engine.world, [
 		
-			object1
+			object1,
+			object2,
+			object3
 		
 			])	 
         
     }); 	
+	
+	
+	Pair.id(staticbrick2,connectedBalls);
+	/* Pair.staticbrick2.render.fillStyle = '#333'; */
+	
+	
 		
-		
+	Events.on(engine, 'collisionStart', function(event) {
+        var pairs = event.pairs;
+
+        
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i];
+			
+		pair.bodyA.render.fillStyle = '#333';} //смена цвета
+	});
+			
 		
 		
 		
