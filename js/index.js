@@ -215,7 +215,7 @@ const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true },{co
 	
 
 	
-const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60);
+const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60, {collisionFilter: {group: -2} } );
 	
 	
 	var addSquare = function () {
@@ -234,8 +234,8 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 	let object2;
 	let object3;
 	object1 = Bodies.rectangle(x+1, y+1, 10, 10);
-object2 = Bodies.rectangle(x+8, y, 10, 10);
-object3 = Bodies.rectangle(x, y+10, 10, 10);	
+	object2 = Bodies.rectangle(x+8, y, 10, 10);
+	object3 = Bodies.rectangle(x, y+10, 10, 10);	
 	World.add(engine.world, [
 		
 			object1,
@@ -245,24 +245,38 @@ object3 = Bodies.rectangle(x, y+10, 10, 10);
 			])	 
         
     }); 	
-	
-	
-	Pair.id(staticbrick2,connectedBalls);
-	/* Pair.staticbrick2.render.fillStyle = '#333'; */
+	let pairId = Pair.id(staticbrick2,connectedBalls); ///не работает
+		
 	
 	
 		
 	Events.on(engine, 'collisionStart', function(event) {
         var pairs = event.pairs;
-
-        
-        for (var i = 0; i < pairs.length; i++) {
+		let x1 = rrr.position.x;
+		let y1 = rrr.position.y;	
+		let object4;
+		object4 = Bodies.rectangle(x1, y1, 4,2, {collisionFilter: {group: -2} } );
+        for (var i = 0; i < pairs.length; i++) { ///отслеживание столкновения
             var pair = pairs[i];
+	
+
+		if (pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
+			pair.bodyB.render.fillStyle = '#333';
+			Matter.World.add(engine.world, object4);}	 
 			
-		pair.bodyA.render.fillStyle = '#333';} //смена цвета
+		 /* else if (pair.bodyB === staticbrick2) { ///реакция на один конкретный объект
+		pair.bodyB.render.fillStyle = '#333';
+		
+		}  */
+		}
 	});
 			
-		
+/* 		Events.on(engine, 'collisonEnd', ({ pairs }) => {
+   pairs.forEach(({ bodyA, bodyB }) => {
+     if (bodyA !== paidId) Matter.World.remove(world, bodyA);
+     if (bodyB !== paidId) Matter.World.remove(world, bodyB);
+  });
+}); */
 		
 		
 		
