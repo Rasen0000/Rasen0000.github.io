@@ -101,7 +101,7 @@ const runMyShit = () => {
 	World.add(engine.world, generateBrickWall(100, SCREEN_SIZE.height - 15 * GROUND_HEIGHT));
 
 
-	const ballB = Bodies.circle(460, 5, 80, {collisionFilter: {group: -1},render: {sprite: {texture: "images/chick.png"}} }); ///кругляш
+	const ballB = Bodies.circle(460, 5, 70, {collisionFilter: {group: -1},render: {sprite: {texture: "images/chick.png"}} }); ///кругляш
 /* 	Matter.Body.setMass(ballB, 10), */
 	///плотность
 
@@ -211,7 +211,7 @@ World.add(engine.world, mouseConstraint);
 
 	
 		
-const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true },{collisionFilter: {group: group} } );
+const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true },{collisionFilter: {group: -2} } );
 	
 
 	
@@ -255,12 +255,12 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 		let x1 = rrr.position.x;
 		let y1 = rrr.position.y;	
 		let object4;
-		object4 = Bodies.rectangle(x1, y1, 4,2, {collisionFilter: {group: -2} } );
+		object4 = Bodies.rectangle((rrr.position.x-15), (rrr.position.y-15), 10,8, {collisionFilter: {group: -2} } );
         for (var i = 0; i < pairs.length; i++) { ///отслеживание столкновения
             var pair = pairs[i];
 	
 
-		if (pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
+		if (pair.bodyA === staticbrick2 && pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
 			pair.bodyB.render.fillStyle = '#333';
 			Matter.World.add(engine.world, object4);}	 
 			
