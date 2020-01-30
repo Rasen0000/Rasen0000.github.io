@@ -211,7 +211,7 @@ World.add(engine.world, mouseConstraint);
 
 	
 		
-const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true },{collisionFilter: {group: -2} } );
+const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true, restitution: 0.8, mass:4000  },{collisionFilter: {group: -2} } );
 	
 
 	
@@ -255,14 +255,24 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 		let x1 = rrr.position.x;
 		let y1 = rrr.position.y;	
 		let object4;
+		let object5;
+		let object6;
 		object4 = Bodies.rectangle((rrr.position.x-15), (rrr.position.y-15), 10,8, {collisionFilter: {group: -2} } );
+		 object5 = Bodies.rectangle(550, 200, 250, 200, {collisionFilter: {group: group} } );
+		object6 = Bodies.rectangle(800, 200, 250, 200, {collisionFilter: {group: group} } );
         for (var i = 0; i < pairs.length; i++) { ///отслеживание столкновения
             var pair = pairs[i];
 	
 
 		if (pair.bodyA === staticbrick2 && pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
+		
 			pair.bodyB.render.fillStyle = '#333';
-			Matter.World.add(engine.world, object4);}	 
+			Matter.World.add(engine.world, [
+			object4,
+			object6,
+			object5
+			]);
+			Matter.World.remove(engine.world, staticbrick2);}	 
 			
 		 /* else if (pair.bodyB === staticbrick2) { ///реакция на один конкретный объект
 		pair.bodyB.render.fillStyle = '#333';
