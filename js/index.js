@@ -34,11 +34,6 @@ const generateBrickWall = (fromX, fromY) => {
 };
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 const runMyShit = () => {
 	const Engine = Matter.Engine, /// содержит методы для создания и управления движками
 		Render = Matter.Render, ///базовый рендерер на основе холста HTML5. Этот модуль необходим для визуализации различных движков.
@@ -217,12 +212,8 @@ World.add(engine.world, mouseConstraint);
 	
 		
 const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true, restitution: 0.8, mass:4000  },{collisionFilter: {group: -2} } );
-<<<<<<< HEAD
 
 let lives = 9;
-=======
-	
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 
 	
 const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60, {collisionFilter: {group: -2} } );
@@ -265,7 +256,6 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 		let x1 = rrr.position.x;
 		let y1 = rrr.position.y;	
 		let object4;
-<<<<<<< HEAD
 		let object41;
 		let object42;
 		let object43;
@@ -290,22 +280,10 @@ const generateBrickWall2 = (fromX, fromY) => {
 	const brickInfo = {
 		height: 100,
 		width: 100
-=======
-		let object5;
-		
-		
-	const generateBrickWall2 = (fromX, fromY) => {
-	
-
-	const BRICK_SIZE = {
-		height: 9,
-		width: 14
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 	};
 
 	const result = [];
 
-<<<<<<< HEAD
 	for (let brickX = 0; brickX < staticbrick2.width; brickX++) {
 		for (let brickY = 0; brickY < staticbrick2.height; brickY++) {
 
@@ -314,16 +292,6 @@ const generateBrickWall2 = (fromX, fromY) => {
 				fromY + brickY * brickInfo.height,
 				brickInfo.width,
 				brickInfo.height
-=======
-	for (let brickX = 0; brickX < staticbrick2.width; brickX += 1) {
-		for (let brickY = 0; brickY < staticbrick2.height; brickY += 1) {
-
-			result.push(Matter.Bodies.rectangle(
-				fromX + brickX * BRICK_SIZE.width,
-				fromY + brickY * BRICK_SIZE.height,
-				BRICK_SIZE.width,
-				BRICK_SIZE.height
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 			));
 		}
 	}
@@ -332,23 +300,13 @@ const generateBrickWall2 = (fromX, fromY) => {
 };
 
 		
-<<<<<<< HEAD
 /* 		object5 = Bodies.rectangle(550, 200, 250, 200, {collisionFilter: {group: group} } );
 		object6 = Bodies.rectangle(800, 200, 250, 200, {collisionFilter: {group: group} } ); */
-=======
-		
-		
-		let object6;
-		object4 = Bodies.rectangle((rrr.position.x-15), (rrr.position.y-15), 10,8, {collisionFilter: {group: -2} } );
-		object5 = Bodies.rectangle(550, 200, 250, 200, {collisionFilter: {group: group} } );
-		object6 = Bodies.rectangle(800, 200, 250, 200, {collisionFilter: {group: group} } );
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
         for (var i = 0; i < pairs.length; i++) { ///отслеживание столкновения
             var pair = pairs[i];
 	
 
 		if (pair.bodyA === staticbrick2 && pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
-<<<<<<< HEAD
 			lives--;
 			pair.bodyB.render.fillStyle = '#333';
 			Matter.World.add(engine.world, [
@@ -368,17 +326,6 @@ const generateBrickWall2 = (fromX, fromY) => {
 			]);
 		
 		Matter.World.remove(engine.world, staticbrick2);} }	 
-=======
-		
-			pair.bodyB.render.fillStyle = '#333';
-			Matter.World.add(engine.world, [
-			object4,
-			object6,
-			generateBrickWall2,
-			object5
-			]);
-			Matter.World.remove(engine.world, staticbrick2);}	 
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 			
 		 /* else if (pair.bodyB === staticbrick2) { ///реакция на один конкретный объект
 		pair.bodyB.render.fillStyle = '#333';
@@ -386,22 +333,7 @@ const generateBrickWall2 = (fromX, fromY) => {
 		}  */
 		}
 	});
-<<<<<<< HEAD
 			World.add(engine.world, [
-=======
-			
-/* 		Events.on(engine, 'collisonEnd', ({ pairs }) => {
-   pairs.forEach(({ bodyA, bodyB }) => {
-     if (bodyA !== paidId) Matter.World.remove(world, bodyA);
-     if (bodyB !== paidId) Matter.World.remove(world, bodyB);
-  });
-}); */
-		
-		
-		
-	
-		World.add(engine.world, [
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 			rrr,
 			
 			staticbrick2,		
@@ -412,49 +344,8 @@ const generateBrickWall2 = (fromX, fromY) => {
 	
 
 	
-<<<<<<< HEAD
-=======
-	
-	
-	
-	
-	
-	
-	
-	
-/* var addSquare = function () {
- return Bodies.rectangle(Math.random()*400 + 30, 30, 60, 60);
-};
-
-
-$('.add-square').on('mousedown', function () {
-    World.add(engine.world, addSquare());
-} */	
-	
-	/* Matter.Mouse.setElement(mouse, staticbrick2); */
-	/* Matter.Mouse.create(addSquare); */
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
 
 };
 
 
-<<<<<<< HEAD
 window.onload = runMyShit;
-=======
-window.onload = runMyShit;
->>>>>>> a0cef03fc61a6287d9bee6edc5042927b3c4f6d4
