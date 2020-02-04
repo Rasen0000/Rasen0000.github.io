@@ -256,9 +256,39 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 		let y1 = rrr.position.y;	
 		let object4;
 		let object5;
+		
+		
+	const generateBrickWall2 = (fromX, fromY) => {
+	
+
+	const BRICK_SIZE = {
+		height: 9,
+		width: 14
+	};
+
+	const result = [];
+
+	for (let brickX = 0; brickX < staticbrick2.width; brickX += 1) {
+		for (let brickY = 0; brickY < staticbrick2.height; brickY += 1) {
+
+			result.push(Matter.Bodies.rectangle(
+				fromX + brickX * BRICK_SIZE.width,
+				fromY + brickY * BRICK_SIZE.height,
+				BRICK_SIZE.width,
+				BRICK_SIZE.height
+			));
+		}
+	}
+
+	return result;
+};
+
+		
+		
+		
 		let object6;
 		object4 = Bodies.rectangle((rrr.position.x-15), (rrr.position.y-15), 10,8, {collisionFilter: {group: -2} } );
-		 object5 = Bodies.rectangle(550, 200, 250, 200, {collisionFilter: {group: group} } );
+		object5 = Bodies.rectangle(550, 200, 250, 200, {collisionFilter: {group: group} } );
 		object6 = Bodies.rectangle(800, 200, 250, 200, {collisionFilter: {group: group} } );
         for (var i = 0; i < pairs.length; i++) { ///отслеживание столкновения
             var pair = pairs[i];
@@ -270,6 +300,7 @@ const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60,
 			Matter.World.add(engine.world, [
 			object4,
 			object6,
+			generateBrickWall2,
 			object5
 			]);
 			Matter.World.remove(engine.world, staticbrick2);}	 
