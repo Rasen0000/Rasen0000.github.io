@@ -211,12 +211,12 @@ World.add(engine.world, mouseConstraint);
 
 	
 		
-const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true, restitution: 0.8, mass:4000  },{collisionFilter: {group: -2} } );
+const staticbrick2 = Bodies.rectangle(700, 200, 500, 200, { isStatic: true, restitution: 0.8, mass:4000  },{collisionFilter: {group: group} } );
 
 let lives = 9;
 
 	
-const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60, {collisionFilter: {group: -2} } );
+const rrr = Bodies.rectangle(Math.random()*400 + 30, Math.random()*400 + 30, 60, 60, {collisionFilter: {group: group} } );
 	
 	
 	var addSquare = function () {
@@ -307,6 +307,12 @@ const generateBrickWall2 = (fromX, fromY) => {
 	
 
 		if (pair.bodyA === staticbrick2 && pair.bodyB === rrr) { ////выделил два конкретных тела и их соприкосновение или НЕТ?
+			
+		
+		/* rrr.speed = rrr.speed + 0.5; */
+		Body.applyForce( rrr, {x: rrr.position.x, y: rrr.position.y}, {x: 0, y: +40});
+		
+
 			lives--;
 			pair.bodyB.render.fillStyle = '#333';
 			Matter.World.add(engine.world, [
